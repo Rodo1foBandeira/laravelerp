@@ -9,6 +9,7 @@
     <table id="table" class="table table-condensed table-hover" data-toggle="bootgrid">
         <thead>
         <tr>
+            <th data-column-id="id" data-type="numeric">#</th>
             <th data-column-id="product" data-order="asc">Nome</th>
             <th data-column-id="quantity">Quantidade</th>
             <th data-column-id="mus">Unidade</th>
@@ -22,19 +23,20 @@
         <tbody>
         @foreach($productVariations as $productVariation)
             <tr>
+                <td>{{$productVariation->id}}</td>
                 <td>{{$productVariation->product->prname}}</td>
                 <td>{{$productVariation->quantity}}</td>
                 <td>{{$productVariation->mUnitSystem->unit}}</td>
                 <td>{{$productVariation->percaddit}}</td>
                 <td>{{$productVariation->valaddit}}</td>
-                <td>{{$productVariation->unitMultiplier->um_multiplier}}</td>
+                <td>{{$productVariation->unitMultiplier->um_iso_code.' | '.$productVariation->unitMultiplier->um_multiplier}}</td>
                 <td>
                     @foreach($productVariation->attributesProducts as $attributesProducts)
-                        @if ($attributesProducts->attribute->pa_key=='color')
-                            @if ($attributesProducts->attribute->pa_value=='white')
-                                {{'<span style="background-color:'.$attributesProducts->attribute->pa_value.';color:black;" class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
+                        @if (($attributesProducts->attribute->pa_key=='color')||($attributesProducts->attribute->pa_key=='cor'))
+                            @if (($attributesProducts->attribute->pa_value=='white')||($attributesProducts->attribute->pa_value=='FFFFFF'))
+                                {{'<span style="background-color:#'.$attributesProducts->attribute->pa_value.';color:black;" class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
                             @else
-                                {{'<span style="background-color:'.$attributesProducts->attribute->pa_value.';" class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
+                                {{'<span style="background-color:#'.$attributesProducts->attribute->pa_value.';" class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
                             @endif
                         @else
                             {{'<span class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}

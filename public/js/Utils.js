@@ -43,6 +43,10 @@ function mupper(v) {
     v=v.toUpperCase();
     return v;
 }
+function mlower(v) {
+    v=v.toLowerCase();
+    return v;
+}
 function mcep(v){
     v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
     v=v.replace(/^(\d{5})(\d)/,"$1-$2")         //Esse é tão fácil que não merece explicações

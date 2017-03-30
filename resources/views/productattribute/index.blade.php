@@ -20,7 +20,17 @@
                 <td>{{$productAttribute->id}}</td>
                 <td>{{$productAttribute->pa_attribute}}</td>
                 <td>{{$productAttribute->pa_key}}</td>
-                <td>{{$productAttribute->pa_value}}</td>
+                <td>
+                    @if (($productAttribute->pa_key=='color')||($productAttribute->pa_key=='cor'))
+                        @if (($productAttribute->pa_value=='white')||($productAttribute->pa_value=='FFFFFF'))
+                            {{'<span style="background-color:#'.$productAttribute->pa_value.';color:black;" class="badge">'.$productAttribute->pa_attribute.'</span>'}}
+                        @else
+                            {{'<span style="background-color:#'.$productAttribute->pa_value.';" class="badge">'.$productAttribute->pa_attribute.'</span>'}}
+                        @endif
+                    @else
+                        {{$productAttribute->pa_value}}
+                    @endif
+                </td>
                 
             </tr>
         @endforeach

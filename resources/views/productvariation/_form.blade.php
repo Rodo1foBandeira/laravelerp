@@ -3,7 +3,7 @@
     {!! Form::select('product_id', $products, null, ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('mus_id','Unidade de padrão',['class'=>'control-label']) !!}
+    {!! Form::label('mus_id','Unidade padrão',['class'=>'control-label']) !!}
     {!! Form::select('mus_id', $mUnitSystems, null, ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">

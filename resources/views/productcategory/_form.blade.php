@@ -10,6 +10,6 @@
 </div>
 <div class="form-group">
     {!! Form::label('pckey','Chave',['class'=>'control-label']) !!}
-    {!! Form::text('pckey', null, ['class'=>'form-control','placeholder'=>'Chave']) !!}
+    {!! Form::text('pckey', null, ['class'=>'form-control','placeholder'=>'chave','onkeyup'=>'mask(this,mlower)']) !!}
 </div>
 {!! Form::submit('Gravar',['class'=>'btn btn-primary']) !!}

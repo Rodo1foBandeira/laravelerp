@@ -9,6 +9,7 @@ use App\ProductAttribute;
 use App\ProductVariation;
 use App\UnitMultiplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductVariationController extends Controller
 {
@@ -33,9 +34,9 @@ class ProductVariationController extends Controller
      */
     public function create()
     {
-        $products = Product::pluck('prname','id');
+        $products = Product::orderBy('prname','asc')->pluck('prname','id');
         $mUnitSystems = MUnitSystem::pluck('unit','id');
-        $unitMultipliers = UnitMultiplier::pluck('um_multiplier','id');
+        $unitMultipliers = UnitMultiplier::select(DB::raw("CONCAT(um_iso_code,' | ',CAST(um_multiplier AS CHAR)) AS iso_code_multiplier"),'id')->pluck('iso_code_multiplier','id');
         return view($this::ROUTE.'.create',compact('products','mUnitSystems','unitMultipliers'));
     }
 
@@ -75,9 +76,9 @@ class ProductVariationController extends Controller
      */
     public function edit($id)
     {
-        $products = Product::pluck('prname','id');
+        $products = Product::orderBy('prname','asc')->pluck('prname','id');
         $mUnitSystems = MUnitSystem::pluck('unit','id');
-        $unitMultipliers = UnitMultiplier::pluck('um_multiplier','id');
+        $unitMultipliers = UnitMultiplier::select(DB::raw("CONCAT(um_iso_code,' | ',CAST(um_multiplier AS CHAR)) AS iso_code_multiplier"),'id')->pluck('iso_code_multiplier','id');
         $productAttributes = ProductAttribute::pluck('pa_attribute','id');
         $productVariation = ProductVariation::find($id);
 
