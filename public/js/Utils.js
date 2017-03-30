@@ -54,3 +54,7 @@ function mtel(v){
     v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
     return v;
 }
+// destroyRow destroy element only
+function destroyRow(id) {
+    document.getElementById(id).remove();
+}

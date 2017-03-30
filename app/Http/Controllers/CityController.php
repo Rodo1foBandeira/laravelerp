@@ -66,7 +66,7 @@ class CityController extends Controller
     {
         $city = City::with('state.country')->find($id);
         $countries = Country::pluck('country','id');
-        $states = State::find($city->state->id)->pluck('state','id');
+        $states = State::where('country_id',$city->state->country->id)->pluck('state','id');
 
         return view('city.edit',compact('city','countries','states'));
     }

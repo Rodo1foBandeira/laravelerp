@@ -30,11 +30,6 @@ function mrg(v){
     return v;
 }
 
-// destroyRow destroy element only
-function destroyRow(id) {
-    document.getElementById(id).remove();
-}
-
 // delRow use in edit for updates
 function delRow(id) {
     if (confirm('Deseja realmente excluir?')){

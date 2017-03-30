@@ -106,4 +106,10 @@ class ProductAttributeController extends Controller
             return redirect($this::ROUTE);
         }
     }
+
+    protected function getAttributes($id)
+    {
+        $attributes = ProductAttribute::select('id','pa_attribute')->orderBy('pa_attribute','asc')->get();
+        return response()->json($attributes);
+    }
 }

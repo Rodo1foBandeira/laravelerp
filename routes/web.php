@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>'auth'], function (){
     Route::resource('productattribute','ProductAttributeController');
+    Route::get('productattribute/getAttributes/{id}','ProductAttributeController@getAttributes');
     Route::resource('brand','BrandController');
     Route::resource('productcategory','ProductCategoryController');
     Route::resource('munitsystem','MUnitSystemController');

@@ -151,7 +151,7 @@ class EntityController extends Controller
             }
         }
 
-        for ($i = 1; $i <= $request->get('countPhones'); $i++){
+        for ($i = 0; $i <= $request->get('countPhones'); $i++){
             if ($request->get('phid'.$i)){
                 if ($request->get('phone'.$i) == 'null'){
                     Phone::find($request->get('phid'.$i))->delete();
@@ -168,7 +168,7 @@ class EntityController extends Controller
             }
         }
 
-        for ($i = 1; $i <= $request->get('countEmails'); $i++){
+        for ($i = 0; $i <= $request->get('countEmails'); $i++){
             if ($request->get('emid'.$i)){
                 if ($request->get('email'.$i) == 'null'){
                     Email::find($request->get('emid'.$i))->delete();

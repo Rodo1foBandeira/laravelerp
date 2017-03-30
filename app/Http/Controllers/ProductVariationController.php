@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\AttributesProduct;
 use App\MUnitSystem;
+use App\Product;
+use App\ProductAttribute;
 use App\ProductVariation;
 use App\UnitMultiplier;
 use Illuminate\Http\Request;
@@ -18,7 +21,7 @@ class ProductVariationController extends Controller
      */
     public function index()
     {
-        $productVariations = ProductVariation::with('product','mUnitSystem','unitMultiplier');
+        $productVariations = ProductVariation::with('product','mUnitSystem','unitMultiplier','attributesProducts.attribute')->get();
 
         return view($this::ROUTE.'.index',compact('productVariations'));
     }
@@ -30,9 +33,10 @@ class ProductVariationController extends Controller
      */
     public function create()
     {
+        $products = Product::pluck('prname','id');
         $mUnitSystems = MUnitSystem::pluck('unit','id');
-        $unitMultipliers = UnitMultiplier::pluck('multiplier','id');
-        return view($this::ROUTE.'.create',compact('mUnitSystems','unitMultipliers'));
+        $unitMultipliers = UnitMultiplier::pluck('um_multiplier','id');
+        return view($this::ROUTE.'.create',compact('products','mUnitSystems','unitMultipliers'));
     }
 
     /**
@@ -43,8 +47,12 @@ class ProductVariationController extends Controller
      */
     public function store(Request $request)
     {
-        ProductVariation::create($request->all());
-
+        $productVariation = ProductVariation::create($request->all());
+        $i = 0;
+        while ($request->get('attr'.$i)){
+            AttributesProduct::create(['prodvar_id'=>$productVariation->id,'attribute_id'=>$request->get('attr'.$i)]);
+            $i++;
+        }
         return redirect($this::ROUTE);
     }
 
@@ -67,11 +75,13 @@ class ProductVariationController extends Controller
      */
     public function edit($id)
     {
+        $products = Product::pluck('prname','id');
         $mUnitSystems = MUnitSystem::pluck('unit','id');
-        $unitMultipliers = UnitMultiplier::pluck('multiplier','id');
+        $unitMultipliers = UnitMultiplier::pluck('um_multiplier','id');
+        $productAttributes = ProductAttribute::pluck('pa_attribute','id');
         $productVariation = ProductVariation::find($id);
 
-        return view($this::ROUTE.'.edit',compact('productVariation','mUnitSystems','unitMultipliers'));
+        return view($this::ROUTE.'.edit',compact('productVariation','products','mUnitSystems','unitMultipliers','productAttributes'));
     }
 
     /**

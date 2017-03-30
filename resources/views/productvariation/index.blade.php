@@ -5,7 +5,7 @@
         <li role="productVariations"><a href="{{route('product.index')}}">Produtos</a></li>
         <li role="productVariations" class="active"><a href="{{route('productvariation.index')}}">Variações</a></li>
     </ul>
-    <h1 class="text-center">Cadastro de Produtos</h1>
+    <h1 class="text-center">Variações de Produtos</h1>
     <table id="table" class="table table-condensed table-hover" data-toggle="bootgrid">
         <thead>
         <tr>
@@ -14,7 +14,7 @@
             <th data-column-id="mus">Unidade</th>
             <th data-column-id="percaddit">Acrescimo %</th>
             <th data-column-id="valaddit">Acrescimo $</th>
-            <th data-column-id="multiplier">Atributos</th>
+            <th data-column-id="multiplier">Multiplicador</th>
             <th data-column-id="attributes">Atributos</th>
             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Ações</th>
         </tr>
@@ -27,13 +27,19 @@
                 <td>{{$productVariation->mUnitSystem->unit}}</td>
                 <td>{{$productVariation->percaddit}}</td>
                 <td>{{$productVariation->valaddit}}</td>
-                <td>{{$productVariation->unitMultiplier->multiplier}}</td>
-                <td>
+                <td>{{$productVariation->unitMultiplier->um_multiplier}}</td>
                 <td>
                     @foreach($productVariation->attributesProducts as $attributesProducts)
-                        {{'<span class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
+                        @if ($attributesProducts->attribute->pa_key=='color')
+                            @if ($attributesProducts->attribute->pa_value=='white')
+                                {{'<span style="background-color:'.$attributesProducts->attribute->pa_value.';color:black;" class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
+                            @else
+                                {{'<span style="background-color:'.$attributesProducts->attribute->pa_value.';" class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
+                            @endif
+                        @else
+                            {{'<span class="badge">'.$attributesProducts->attribute->pa_attribute.'</span>'}}
+                        @endif
                     @endforeach
-                </td>
                 </td>
             </tr>
         @endforeach

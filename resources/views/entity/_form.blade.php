@@ -105,12 +105,12 @@
     <div class="form-inline" id="phones">
         @if (isset($entity))
             @foreach($entity->phones as $key => $phone)
-                <?php $id = $key+1; ?>
-                <div class="form-inline" id="phone{!! $id !!}" style="margin-bottom: 5px">
-                    {!! Form::text('phid'.$id, $phone->id, ['style'=>'display:none;']) !!}
-                    {!! Form::text('phone'.$id, $phone->number, ['class'=>'form-control','placeholder'=>'Contato','onkeyup'=>' mask( this, mtel )', 'maxlegth'=>'15']) !!}
-                    {!! Form::text('pnotes'.$id, $phone->pnotes, ['class'=>'form-control','placeholder'=>'Observações']) !!}
-                    <a class="btn btn-primary btn-xs" style="margin-left: 3px;" onclick="delRow('phone{!! $id !!}')"><span class="glyphicon glyphicon-minus"></span></a>
+
+                <div class="form-inline" id="phone{!! $key !!}" style="margin-bottom: 5px">
+                    {!! Form::text('phid'.$key, $phone->id, ['style'=>'display:none;']) !!}
+                    {!! Form::text('phone'.$key, $phone->number, ['class'=>'form-control','placeholder'=>'Contato','onkeyup'=>' mask( this, mtel )', 'maxlegth'=>'15']) !!}
+                    {!! Form::text('pnotes'.$key, $phone->pnotes, ['class'=>'form-control','placeholder'=>'Observações']) !!}
+                    <a class="btn btn-primary btn-xs" style="margin-left: 3px;" onclick="delRow('phone{!! $key !!}')"><span class="glyphicon glyphicon-minus"></span></a>
                 </div>
             @endforeach
         @endif
@@ -122,12 +122,11 @@
     <div class="form-inline" id="emails">
         @if (isset($entity))
             @foreach($entity->emails as $key => $email)
-                <?php $id = $key+1; ?>
-                <div class="form-inline" id="email{!! $id !!}" style="margin-bottom: 5px">
-                    {!! Form::text('emid'.$id, $email->id, ['style'=>'display:none;']) !!}
-                    {!! Form::email('email'.$id, $email->email, ['class'=>'form-control','placeholder'=>'E-mail']) !!}
-                    {!! Form::text('enotes'.$id, $email->enotes, ['class'=>'form-control','placeholder'=>'Observações']) !!}
-                    <a class="btn btn-primary btn-xs" style="margin-left: 3px;" onclick="delRow('email{!! $id !!}')"><span class="glyphicon glyphicon-minus"></span></a>
+                <div class="form-inline" id="email{!! $key !!}" style="margin-bottom: 5px">
+                    {!! Form::text('emid'.$key, $email->id, ['style'=>'display:none;']) !!}
+                    {!! Form::email('email'.$key, $email->email, ['class'=>'form-control','placeholder'=>'E-mail']) !!}
+                    {!! Form::text('enotes'.$key, $email->enotes, ['class'=>'form-control','placeholder'=>'Observações']) !!}
+                    <a class="btn btn-primary btn-xs" style="margin-left: 3px;" onclick="delRow('email{!! $key !!}')"><span class="glyphicon glyphicon-minus"></span></a>
                 </div>
             @endforeach
         @endif
